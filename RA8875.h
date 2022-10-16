@@ -148,7 +148,7 @@ CS       10		53           YES       CS
 #ifndef _RA8875MC_H_
 #define _RA8875MC_H_
 
-#include "_includes/RA8875_CPU_commons.h"
+#include "_settings/RA8875_CPU_commons.h"
 
 
 #if !defined(swapvals)
@@ -160,7 +160,7 @@ CS       10		53           YES       CS
 	#endif
 #endif
 
-enum RA8875sizes { 			RA8875_480x272, RA8875_800x480, RA8875_800x480ALT, Adafruit_480x272, Adafruit_800x480 };
+enum RA8875sizes { 			RA8875_480x272, RA8875_800x480, RA8875_800x480ALT, Adafruit_480x272, Adafruit_800x480, RA8875_480x128 };
 enum RA8875tcursor { 		NOCURSOR=0,IBEAM,UNDER,BLOCK };//0,1,2,3
 enum RA8875tsize { 			X16=0,X24,X32 };//0,1,2
 enum RA8875fontSource { 	INTFONT=0, EXTFONT };//0,1
@@ -189,9 +189,9 @@ CJK-Uni:	\u4E00 -> \u9FD5	/u4E ... /u9F
 */
 /* ----------------------------DO NOT TOUCH ANITHING FROM HERE ------------------------*/
 
-#include "_includes/font.h"
-#include "_includes/RA8875Registers.h"
-#include "_includes/RA8875ColorPresets.h"
+#include "_settings/font.h"
+#include "_settings/RA8875Registers.h"
+#include "_settings/RA8875ColorPresets.h"
 #include "_settings/RA8875UserSettings.h"
 
 #if defined(_FORCE_PROGMEM__) && !defined(ESP8266) && !defined(ESP32)
@@ -314,7 +314,7 @@ class RA8875 : public Print {
 	#endif
 //------------- SETUP -----------------------------------------------------------------------
 	void 		begin(const enum RA8875sizes s,uint8_t colors=16);
-	//(RA8875_480x272, RA8875_800x480, Adafruit_480x272, Adafruit_800x480) , (8/16 bit)
+	//(RA8875_480x272, RA8875_800x480, Adafruit_480x272, Adafruit_800x480, RA8875_480x128) , (8/16 bit)
 //------------- HARDWARE ------------------------------------------------------------
 	void 		backlight(boolean on);
 	void    	displayOn(boolean on);//turn diplay on/off
@@ -436,7 +436,7 @@ class RA8875 : public Print {
 	}
 //-------------- GAUGES ---------------------------------------------------------------------------
 	void 		ringMeter(int val, int minV, int maxV, int16_t x, int16_t y, uint16_t r, const char* units="none", uint16_t colorScheme=4,uint16_t backSegColor=RA8875_BLACK,int16_t angle=150,uint8_t inc=10);
-	void		roundGaugeTicker(uint16_t x, uint16_t y, uint16_t r, int from, int to, float dev,uint16_t color);
+	void		roundGaugeTicker(uint16_t x, uint16_t y, uint16_t r, int from, int to, float dev, uint16_t color, uint16_t degrees_per_segment = 30);
 //-------------- LAYERS --------------------------------------------------------------------------
 	void 		useLayers(boolean on);//mainly used to turn of layers!
 	void		writeTo(enum RA8875writes d);//L1, L2, CGRAM, PATTERN, CURSOR

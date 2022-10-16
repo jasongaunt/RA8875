@@ -163,6 +163,7 @@ void RA8875::selectCS(uint8_t module)
     RA8875_800x480 (5" and 7" displays)
 	Adafruit_480x272 (4.3" Adafruit displays)
 	Adafruit_800x480 (5" and 7" Adafruit displays)
+	RA8875_480x128 (3.9" displays)
 	(colors) - The color depth (default 16) 8 or 16 (bit)
 	-------------------------------------------------------------
 	UPDATE! in Energia IDE some devices needs an extra parameter!
@@ -266,6 +267,11 @@ void RA8875::begin(const enum RA8875sizes s,uint8_t colors)
 			if (_color_bpp < 16) _maxLayers = 2;
 			_initIndex = 1;
 			if (_displaySize == RA8875_800x480ALT) _initIndex = 2;
+		break;
+		case RA8875_480x128:
+			_width =    480;
+			_height =   128;
+			_initIndex = 3;
 		break;
 		default:
 		_errorCode |= (1 << 0);//set
@@ -3601,11 +3607,11 @@ void RA8875::drawLineAngle(int16_t x, int16_t y, int16_t angle, uint16_t start, 
 	}
 }
 
-void RA8875::roundGaugeTicker(uint16_t x, uint16_t y, uint16_t r, int from, int to, float dev,uint16_t color) 
+void RA8875::roundGaugeTicker(uint16_t x, uint16_t y, uint16_t r, int from, int to, float dev, uint16_t color, uint16_t degrees_per_segment) 
 {
   float dsec;
   int i;
-  for (i = from; i <= to; i += 30) {
+  for (i = from; i <= to; i += degrees_per_segment) {
     dsec = i * (PI / 180);
     drawLine(
 		x + (cos(dsec) * (r / dev)) + 1,
@@ -4914,7 +4920,7 @@ void RA8875::brightness(uint8_t val)
 /**************************************************************************/
 void RA8875::backlight(boolean on) //0.69b31 (fixed an issue with adafruit backlight)
 {
-	if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480) GPIOX(on);
+	if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480 || _displaySize == RA8875_480x128) GPIOX(on);
 	if (on == true){
 		PWMsetup(1,true, RA8875_PWM_CLK_DIV1024);//setup PWM ch 1 for backlight
 		PWMout(1,_brightness);//turn on PWM1
@@ -5717,7 +5723,7 @@ void RA8875::sleep(boolean sleep)
 		_sleep = sleep;
 		if (_sleep == true){
 			//1)turn off backlight
-			if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480/* || _displaySize == Adafruit_640x480*/) GPIOX(false);
+			if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480 || _displaySize == RA8875_480x128/* || _displaySize == Adafruit_640x480*/) GPIOX(false);
 			//2)decelerate SPI clock
 			#if defined(_FASTCPU)
 				_slowDownSPI(true);
@@ -5772,7 +5778,7 @@ void RA8875::sleep(boolean sleep)
 			//5)PLL afterburn!
 			_setSysClock(sysClockPar[_initIndex][0],sysClockPar[_initIndex][1],initStrings[_initIndex][2]);
 			//5)turn on backlight
-			if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480/* || _displaySize == Adafruit_640x480*/) GPIOX(true);
+			if (_displaySize == Adafruit_480x272 || _displaySize == Adafruit_800x480 || _displaySize == RA8875_480x128/* || _displaySize == Adafruit_640x480*/) GPIOX(true);
 			//_writeRegister(RA8875_PWRR, RA8875_PWRR_NORMAL);
 		}
 	}

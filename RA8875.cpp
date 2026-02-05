@@ -273,6 +273,7 @@ void RA8875::begin(const enum RA8875sizes s,uint8_t colors)
 			_width =    480;
 			_height =   128;
 			_initIndex = 3;
+		break;
 		case ST7282_39_480x128:
 			_width =    480;
 			_height =   128;

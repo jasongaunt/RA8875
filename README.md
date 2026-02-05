@@ -1,75 +1,37 @@
-RA8875 library 0.80b1 [first beta]
-===========================================
-
-First attempt to include support also for ESP32.
-First tests worked fine, also resistive touch.
-
-Known issues are:
-- Capacitive touch not yet implemented (removed in the ESP32 version)
-- if Font-Rotation is used, text is somehow mirrored
-
-
-RA8875 library 0.7911p10 [Testing gold release]
+RA8875 library 0.80b2 [ESP32 and PlatformIO support]
 ===========================================
 
 **Wiki added!** https://github.com/sumotoy/RA8875/wiki<br>
-This is the last <b>'development'</b> version, last known <b>stable</b> version is here:<br>
+Development continues through community support, last known <b>stable</b> version is here:<br>
 https://github.com/sumotoy/RA8875/tree/0.70<br>
 The development release normally contain bug fixes so it's almost safe to use but if you have problems you can switch back to the stable release (I try to keep as stable I can)<br>
 Moved a lot of 'bla bla' in the wiki, readme cleaned.
 
-##### Current version 0.70b11, Please read!!!.<br>
-**0.70b11p1** changes...<br>
- - New optimized User Font Rendering engine, over 23 times faster.
- - Added template & stepByStep wiki for converting fonts with lcd-image-converter.
- - Changed font file scheme, now just one file and support PROGMEM for low memory cpu's.
- - Added more fonts.
- - Added initial support for many other CPU's (ESP, Chipkit, STM32).
- - Text Rendered now correctly follows wrap rules.
- - Fixed setFontScale(x,y), x and y scale was inverted (this can affect code that uses b10)
- - Fixed a bug when scaling it's on with showUserChar
- - Fixed a bug on println for render fonts.(this can affect code that uses b10)
- - Updated many outdated examples.
- - Changed licence from CC to GNU v3<br>
+**0.80b1** changes...<br>
+- First attempt to include support also for ESP32.
+  - First tests worked fine, also resistive touch.
+- Known issues are:
+  - Capacitive touch not yet implemented (removed in the ESP32 version)
+  - if Font-Rotation is used, text is somehow mirrored
 
-**0.70b11p2** changes...<br>
- - Try to fix drawPixel and drawPixels color bug in 8bit mode (RA8875 hardware error).
- - Command useLayers(false) re-enable 16bit bpp as well.<br>
+**0.80b2** changes...<br>
+- Numerous fixes to use as library in PlatformIO with Espressif32 (ESP32 support)
+- Adds lots more colour presets - see [RA8875ColorPresets.h](_settings/RA8875ColorPresets.h)
+- `tft.roundGaugeTicker(...)` now optionally lets you specify how many degrees between ticks
+- Adds support for Midas MCT039A12W480128LML 3.9" 480x128 TFT (although sadly now EOL)
+- Adds support for Eastriding ER-TFT039-1 3.9" 480x128 ST7282 TFT, and by proxy...
+- (Hopefully) adds support for other ST7282-based 3.9" 480x128 panels (Newhaven etc)
 
-**0.70b11p3** changes...<br>
- - Fixed drawPixel and drawPixels for 8bit mode, added _color16To8bpp optimized.<br>
-
-**0.70b11p4** changes...<br>
- - Fixed an error in font rendering, I have to add a new parameter in font file so if someone of you have already converted some font with release prior this one you need to update the template of lcd-image-converter with the new one provided in this release and re-convert, just open the .xlm file e 'Convert', new font file will be updated. Haved to upload again all fonts with new scheme but in the hurry I forget to included licenses so I will provide this tomorrow, sorry to font authors!<br>
-
-**0.70b11p5** changes...<br>
- - Fixed a bug in Font Rendering Line Optimizer that causes loss pixels in some font. Now works as it should and it's also slight faster.<br>
-
-**0.70b11p6** changes...<br>
- - Fixed a stupid error in setFontScale (was inverted), some improvements in several drawings functions, added ER3301_1 font rom.<br>
-
-**0.70b11p7** changes...<br>
- - Added an user option in _settings/RA8875UserSettings.h to use alternative Wire1 on Arduino DUE, experimental since I'm actually don't have a DUE.<br>
-
-**0.70b11p8** changes...(will be downloadable in few hours)<br>
- - Fixed some small bugs (thanks Mr Tom), added some extra support for different CPU's, fixed a couple of examples.
- - Introduced some major changes in initialization, it seems works but better check with differents MCU's before apply as 'gold master'<br>
-
-
-**0.70b11p9** changes...<br>
- - Fixed compiling compatibility with Particle Spark<br>
-
-**0.70b11p10** changes...<br>
- - Added initial support for incoming Teensy's
- - Some changes from MrTom accepted, should fix an hardware bug in trianles and some other minor things
- - Created _includes folder and moved from settings some file that should never change, this will help users to save their settings between updates.<br>
- 
 
 Current beta **tested only with**:
 * EastRising RA8875 5"Inch (480x272) with resistive Touch or FT chip capacitive<br>
 * EastRising RA8875 7"Inch (800x480) with FT chip capacitive<br>
 * EastRising RA8875 5"Inch (800x480) with resistive Touch<br>
+* Midas MCT039A12W480128LML 3.9"Inch (480x128) with Adafruit RA8875 Driver Board<br>
+* Eastriding ER-TFT039-1 3.9"Inch (480x128) with Adafruit RA8875 Driver Board<br>
+
  All tested with Teensy 3.0, Teensy 3.1, Teensy LC, Arduino DUE, Arduino UNO, Arduino MEGA<br>
+ 3.9" screens tested with ESP32 PICO D4 and Adafruit RA8875 Driver Board<br>
 Check 'Proof of working' in wiki.<br>
 
 ##### Not Working? Check here!<br>

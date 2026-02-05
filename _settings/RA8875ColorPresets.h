@@ -19,4 +19,24 @@ const uint16_t 	RA8875_PINK 			= 0xFCFF; // M.Sandercock
 const uint16_t 	RA8875_PURPLE 			= 0x8017; // M.Sandercock
 const uint16_t 	RA8875_GRAYSCALE 		= 2113;//grayscale30 = RA8875_GRAYSCALE*30
 
+// Jason Gaunt - Generated with https://chrishewett.com/blog/true-rgb565-colour-picker/
+const uint64_t  RA8875_LIGHT_RED        = 0xFBEF;
+const uint64_t  RA8875_LIGHT_YELLOW     = 0xFFEF;
+const uint64_t  RA8875_LIGHT_GREEN      = 0x7FEF;
+const uint64_t  RA8875_SKY_BLUE         = 0xBFFF;
+const uint64_t  RA8875_LIGHT_BLUE       = 0x7BFF;
+const uint64_t  RA8875_LIGHT_INDIGO     = 0x7BDF;
+const uint64_t  RA8875_LIGHT_GRAY       = 0xBDF7;
+
+const uint64_t  RA8875_INDIGO           = 0x781F;
+const uint64_t  RA8875_GRAY             = 0x7BEF;
+
+const uint64_t  RA8875_DARK_RED         = 0x7800;
+const uint64_t  RA8875_DARK_YELLOW      = 0x7BE0;
+const uint64_t  RA8875_DARK_GREEN       = 0x03E0;
+const uint64_t  RA8875_TEAL             = 0x03EF;
+const uint64_t  RA8875_DARK_BLUE        = 0x000F;
+const uint64_t  RA8875_DARK_INDIGO      = 0x380F;
+const uint64_t  RA8875_DARK_GRAY        = 0x39E7;
+
 #endif
